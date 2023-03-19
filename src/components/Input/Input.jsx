@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Input() {
-    const  [itemName, setItemName] = useState('')
-    const  [itemQuantity, setItemQuantity] = useState('')
-    const  [itemUnit, setItemUnit] = useState('')
-    const  [itemList, setItemList] = useState([]);
+    const [itemName, setItemName] = useState('')
+    const [itemQuantity, setItemQuantity] = useState('')
+    const [itemUnit, setItemUnit] = useState('')
+    const [itemList, setItemList] = useState([]);
 
     const fetchItemList = () => {
         axios.get('/list').then((response) => {
@@ -22,7 +22,7 @@ function Input() {
     }, []); // ! Remember the empty Array
     const submitForm = (e) => {
         e.preventDefault();
-        axios.post('/list',{
+        axios.post('/list', {
             //Using values from our variables in state
             name: itemName,
             quantity: itemQuantity,
@@ -40,27 +40,30 @@ function Input() {
     return (
         <div>
             {/* Used for testing */}
-            { JSON.stringify(itemList) }
-            {/* <form onSubmit={submitForm}>
+            {/* { JSON.stringify(itemList) } */}
+            <form onSubmit={submitForm}>
                 Name:<input type="text"
-                value={creatureName}
-                onChange={(e) => setCreatureName(e.target.value)} />
+                    value={itemName}
+                    onChange={(e) => setItemName(e.target.value)} />
                 <br />
-                Quantity:<input type="text"
-                value={creatureOrigin}
-                onChange={(e) => setCreatureOrigin(e.target.value)} />
+                Quantity:<input type="number"
+                    value={itemQuantity}
+                    onChange={(e) => setItemQuantity(e.target.value)} />
+                <br />
+                Unit:<input type="text"
+                    value={itemUnit}
+                    onChange={(e) => setItemUnit(e.target.value)} />
                 <input type="submit" />
             </form>
             <ul>
                 {
-                    listOfCreatures.map((creature) => (
-                        // what we want to render
-                        <li key={creature.id}>
-                            {creature.name} from {creature.origin}
+                    itemList.map((item) => (
+                        <li key={item.id}>
+                            {item.name} Qty: {item.quantity} Unit: {item.unit}
                         </li>
                     ))
                 }
-            </ul> */}
+            </ul>
         </div>
     );
 }
