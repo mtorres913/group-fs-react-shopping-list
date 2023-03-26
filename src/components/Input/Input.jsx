@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Input.css';
 
 function Input() {
     const [itemName, setItemName] = useState('')
@@ -53,7 +54,7 @@ function Input() {
                 Unit:<input type="text"
                     value={itemUnit}
                     onChange={(e) => setItemUnit(e.target.value)} />
-                <input type="submit" />
+                <input class="button" type="submit" />
             </form>
             <ul>
                 {
