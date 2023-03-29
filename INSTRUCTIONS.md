@@ -22,7 +22,7 @@ Each item can have a:
 - Unit - text, allow up to 20 characters (optional)
 
 When the page first loads, all the existing items should be displayed with the quantity & unit combined together for display. Each item should also have an option to remove it from the list or mark it as purchased. Once purchased, the buttons should be hidden and the item should show as "Purchased". 
-
+qoutes
 Items should initially appear alphabetically, but as items are marked purchased they should sort to the end of the list.
 
 The `Reset` button should clear the purchased status from all items, allowing the list to be re-used. The `Clear` button should remove all items from the list, deleting them from the database.

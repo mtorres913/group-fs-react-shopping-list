@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Input.css';
+import InputItem  from './InputItem.jsx';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+
 
 function Input() {
     const [itemName, setItemName] = useState('')
     const [itemQuantity, setItemQuantity] = useState('')
     const [itemUnit, setItemUnit] = useState('')
     const [itemList, setItemList] = useState([]);
+
+
 
     const fetchItemList = () => {
         axios.get('/list').then((response) => {
@@ -21,6 +27,9 @@ function Input() {
         // At this point, React is ready!
         fetchItemList();
     }, []); // ! Remember the empty Array
+
+  
+  
     const submitForm = (e) => {
         e.preventDefault();
         axios.post('/list', {
@@ -38,8 +47,10 @@ function Input() {
             alert('Something went wrong.');
         })
     }
+
+    
     return (
-        <div>
+        <Container>
             {/* Used for testing */}
             {/* { JSON.stringify(itemList) } */}
             <form onSubmit={submitForm}>
@@ -54,18 +65,20 @@ function Input() {
                 Unit:<input type="text"
                     value={itemUnit}
                     onChange={(e) => setItemUnit(e.target.value)} />
-                <input class="button" type="submit" />
+                <input type="submit" />
             </form>
-            <ul>
+            <Grid container spacing={2}>
                 {
                     itemList.map((item) => (
-                        <li key={item.id}>
-                            {item.name} Qty: {item.quantity} Unit: {item.unit}
-                        </li>
+                     <InputItem
+                        key={item.id} 
+                        item={item}
+                        fetchItemList={fetchItemList}
+                        />
                     ))
                 }
-            </ul>
-        </div>
+           </Grid>
+            </Container>
     );
 }
 
