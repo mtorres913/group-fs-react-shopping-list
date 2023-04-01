@@ -5,7 +5,7 @@ const pool = require('../modules/pool.js');
 router.get('/', (req, res) => {
     // When you fetch all things in these GET routes, strongly encourage ORDER BY
     // so that things always come back in a consistent order 
-    const sqlText = `SELECT * FROM list ORDER BY name, quantity, unit  DESC;`;
+    const sqlText = `SELECT * FROM list ORDER BY name, quantity, unit, purchased DESC;`;
     pool.query(sqlText)
         .then((result) => {
             // console.log(`Got stuff back from the database`, result);
@@ -49,8 +49,8 @@ router.put('/:id', (req,res) => {
     console.log(`In PUT request /list`);
     let itemID = req.params.id;
     let itemToEdit = req.params.body;
-    let queryText = 'UPDATE "list" SET "purchased" = $1 WHERE "id" = $2;'
-    pool.query(queryText,[itemToEdit.purchased, itemID]).then((result) => {
+    let queryText = 'UPDATE "list" SET "purchased" = $1  WHERE "id" = $2;'
+    pool.query(queryText,['Yes', itemID]).then((result) => {
         res.sendStatus(200);
     }).catch((error) => {
         console.log(`Error in PUT ${error}`)

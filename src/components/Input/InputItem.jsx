@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 
 
 
-function InputItem({ item, itemName, fetchItemList }) {
+function InputItem({ item, fetchItemList }) {
 
     useEffect(() => {
         // At this point, React is ready!
@@ -30,6 +30,9 @@ function InputItem({ item, itemName, fetchItemList }) {
         // console.log(`Purchasing item ${item.id}`);
         axios.put(`/list/${item.id}`).then((response) => {
             fetchItemList();
+        }).catch((error) => {
+            console.log(`Error in purchaseItem ${error}`);
+            alert('Something went wrong.');
         })
 
     }
